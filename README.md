@@ -1,6 +1,6 @@
 # Shiba-Unu Blog
 
-Semantic UI blog template with backend in Python and Flask. Has a subscription block with a mail server, in-house search engine and top-5 section. Shiba-Inu logos are made in Illustrator and cannot be used without permission.
+Semantic UI blog template with backend in Python and Flask. Has a subscription block with a mail server, in-house search engine and top-5 section. Shiba-Inu logos are made via Illustrator and cannot be used without permission.
 
 ## CS50
 
