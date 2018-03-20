@@ -1,6 +1,6 @@
 # Shiba-Inu Blog
 
-Semantic UI blog template with backend in Python and Flask. Has a subscription block with a mail server, in-house search engine and top-5 section. Shiba-Inu logos are made via Illustrator and cannot be used without permission.
+Semantic UI blog template with backend in Python and Flask. Has a subscription block with a mail server, in-house full-text search engine and top-5 section. Shiba-Inu logos are made via Illustrator and cannot be used without permission.
 
 ## CS50
 
@@ -64,7 +64,7 @@ Mail is sent asynchronously.
 
 ### Search Engine
 
-Blog has an in-house search engine, built using full-text SQL. You can find not only keywords, but sentences and phrases.
+Blog has an in-house full-text search engine, built using FTS4 SQLite extention. You can find not only keywords, but sentences and phrases.
 
 ![Alt text](blog/static/images/blog_search.jpg?raw=true)
 
