@@ -1,10 +1,10 @@
-# Shiba-Unu Blog
+# Shiba-Inu Blog
 
 Semantic UI blog template with backend in Python and Flask. Has a subscription block with a mail server, in-house search engine and top-5 section. Shiba-Inu logos are made via Illustrator and cannot be used without permission.
 
 ## CS50
 
-This blog was initially made as a final project for the Harvard University CS50 programming course.
+This blog was initially made as a final project for the Harvard University [CS50](https://cs50.harvard.edu) programming course.
 
 ## Preview
 
@@ -21,7 +21,7 @@ These instructions will get you a copy of the project up and running on your loc
 Download the repository manually or run:
 
 ```
-$ git clone https://github.com/artnikitin/blog.git
+$ git clone https://github.com/joliejuly/blog.git
 ```
 Files should be installed as a package:
 
