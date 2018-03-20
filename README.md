@@ -35,9 +35,9 @@ $ flask run
 
 Flask documentation for that – http://flask.pocoo.org/docs/0.12/patterns/packages/
 
-### Usage
+## Usage
 
-#### Admin Page
+### Admin Page
 
 Access admin page via /admin_posts URL.
 Password is stored as **app.password** variable inside __init.py__ module. Change it and store as an environment variable for security purposes.
@@ -46,7 +46,7 @@ Password is stored as **app.password** variable inside __init.py__ module. Chang
 
 ![Alt text](blog/static/images/blog_admin.jpg?raw=true)
 
-#### Mail Server
+### Mail Server
 
 This blog has a subscription feature, which runs using flask_mail server. It's all set up.
 Inside __init.py__ module insert your mail settings:
@@ -60,15 +60,15 @@ app.config['MAIL_PASSWORD'] = "password"
 ```
 Mail is sent asynchronously.
 
-### Key Features
+## Key Features
 
-#### Search Engine
+### Search Engine
 
 Blog has an in-house search engine, built using full-text SQL. You can find not only keywords, but sentences and phrases.
 
 ![Alt text](blog/static/images/blog_search.jpg?raw=true)
 
-#### URL Slugify
+### URL Slugify
 
 Slugify function allows you to dynamically generate urls like "how-to-choose-your-shiba-inu". It also supports cyrillic headers – they are translated into latin alphabet.
 
