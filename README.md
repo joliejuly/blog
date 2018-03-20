@@ -33,7 +33,7 @@ $ pip3 install -e .
 $ flask run
 ```
 
-Flask documentation for that – http://flask.pocoo.org/docs/0.12/patterns/packages/
+For further information check Flask documentation – http://flask.pocoo.org/docs/0.12/patterns/packages/
 
 ## Usage
 
