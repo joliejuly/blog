@@ -8,10 +8,6 @@ This blog was initially made as a final project for the Harvard University CS50 
 
 ## Preview
 
-Home page:
-
-![Alt text](blog/static/images/blog_home.jpg?raw=true)
-
 Post example:
 
 ![Alt text](blog/static/images/blog_post.jpg?raw=true)
