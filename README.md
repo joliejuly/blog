@@ -1,6 +1,6 @@
 # Shiba-Unu Blog
 
-Semantic UI blog template with backend in Python and Flask. Has a subscription block with a mail server, in-house search engine and top-5 section. Shiba-Inu logos are made in Illustrator and cannot be used without permission.
+Semantic UI blog template with backend in Python and Flask. Has a subscription block with a mail server, in-house search engine and top-5 section. Shiba-Inu logos are made via Illustrator and cannot be used without permission.
 
 ## CS50
 
@@ -33,7 +33,7 @@ $ pip3 install -e .
 $ flask run
 ```
 
-Flask documentation for that – http://flask.pocoo.org/docs/0.12/patterns/packages/
+For further information check Flask documentation – http://flask.pocoo.org/docs/0.12/patterns/packages/
 
 ## Usage
 
@@ -42,7 +42,7 @@ Flask documentation for that – http://flask.pocoo.org/docs/0.12/patterns/packa
 Access admin page via /admin_posts URL.
 Password is stored as **app.password** variable inside __init.py__ module. Change it and store as an environment variable for security purposes.
 
-**Text editor** for posts – [Tiny MCE]("https://www.tinymce.com")
+**Text editor** for posts – [Tiny MCE](https://www.tinymce.com)
 
 ![Alt text](blog/static/images/blog_admin.jpg?raw=true)
 
