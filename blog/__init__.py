@@ -23,12 +23,12 @@ csrf = CSRFProtect(app)
 
 # email configurations
 
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_SERVER'] = 'smtp.yourhost.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
-app.config['MAIL_USERNAME'] = "joliejuly@gmail.com"
-app.config['MAIL_PASSWORD'] = "msgauczimgndvxwk"
+app.config['MAIL_USERNAME'] = "username@yourhost.com"
+app.config['MAIL_PASSWORD'] = "password"
 
 mail = Mail(app)
 
