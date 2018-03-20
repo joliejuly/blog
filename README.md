@@ -39,7 +39,7 @@ For further information check Flask documentation – http://flask.pocoo.org/doc
 
 ### Admin Page
 
-Access admin page via /admin_posts URL.
+Access admin page via **/admin_posts** URL.
 Password is stored as **app.password** variable inside __init.py__ module. Change it and store as an environment variable for security purposes.
 
 **Text editor** for posts – [Tiny MCE](https://www.tinymce.com)
