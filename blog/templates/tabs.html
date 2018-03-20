@@ -1,0 +1,314 @@
+{% extends "admin_base.html" %}
+
+
+{% block article %}
+
+{# tabs #}
+    <div class="ui top attached tabular menu">
+      <a class="item active" data-tab="first">All posts</a>
+      <a class="item" data-tab="second">Drafts</a>
+      <a class="item" data-tab="third">Published</a>
+      <a class="item" data-tab="fourth">Pinned post</a>
+    </div>
+    <div class="ui bottom attached tab segment active" data-tab="first">
+      {% for entry in entries %}
+      
+      <div class="ui raised segment">
+        
+        <!-- round button edit -->
+        <form action="{{ url_for("edit") }}" method="post">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+          <input name="edit_id" value="{{ entry.rowid }}" hidden>
+          <button class="circular ui icon right floated button" name="edit_btn" value="edit">
+            <i class="write icon"></i>
+          </button>
+        </form>
+        
+        <!-- see unpublished posts -->
+
+        {% if entry.published %}
+                <form style="display: inline;" action="{{ url_for('edit') }}" method="post">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                  <!-- publish button -->
+                  <input name="rowid" value="{{ entry.rowid }}" hidden>
+                  <button class="ui basic button" name="unpublish" value="unpublish"><i class="hide icon"></i>
+                    Unpublish
+                  </button>
+                </form>
+                
+                {% if not entry.top5 %}
+                
+                      {# кнопка добавить в top5 #}
+                      <form style="display: inline;" action="{{ url_for("top_5")}}" method="post">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                        <input name="rowid" value="{{ entry.rowid }}" hidden>
+                        <button class="ui inverted violet button" name="add_to_top5" value="add_to_top5"><i class="paw icon"></i>
+                          Top 5
+                        </button>
+                      </form>
+                      
+                {% else %}
+                        
+                      {# кнопка убрать из top5 #}
+                      <form style="display: inline;" action="{{ url_for("top_5")}}" method="post">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                        <input name="rowid" value="{{ entry.rowid }}" hidden>
+                        <button class="ui basic button" name="remove_from_top5" value="remove_from_top5"><i class="paw icon"></i>
+                          Untop 5
+                        </button>
+                      </form>
+                
+                {% endif %}
+
+                <p></p>
+                <p></p>
+
+                <!-- header -->
+                <h1 class="ui header index"><a class="ui header index_header_links" href="{{ url_for("admin_show_post", url = entry.url )}}">{{ entry.title|safe }}</a></h1>
+
+        {% else %}
+        
+              <form style="display: inline; " action="{{ url_for('edit') }}" method="post">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                <!-- publish button -->
+                <input name="rowid" value="{{ entry.rowid }}" hidden>
+                <button class="ui inverted pink button" name="publish_index" value="publish_index"><i class="unhide icon"></i>Publish
+                </button>
+              </form>
+              <p></p>
+              <p></p>
+              {% set url_test = entry.url %}
+                
+                <!-- header -->
+                  <h1 class="ui header index"><a class="ui header index_header_links unpublished" href="{{ url_for("admin_show_post", url = url_test )}}">{{ entry.title|safe }}</a></h1>
+        {% endif %}
+
+            <p></p>
+            <p><i>{{ entry.date|safe }}</i></p>
+            <p></p> 
+            <p>{{ entry.lead| safe }}</p>
+                {% if entry.body|length < 980 %}
+                    <p>{{ entry.body|safe }}</p>
+                {% else %}
+                  <div class="ui accordion">
+                      <div class="title">
+                          <i class="dropdown icon"></i>
+                            More
+                          </div>
+                      <div class="content">
+                        <p>{{ entry.body|safe }}</p>
+                      </div>
+                    </div><!-- end of accordion -->
+                {% endif %}
+          
+      </div><!-- end of raised segment(item) -->
+        
+      {% endfor %}
+      
+    </div><!-- end of first tab -->
+
+<div class="ui bottom attached tab segment" data-tab="second">
+  
+  {% for entry in entries %}    
+    
+    {% if not entry.published %}
+
+        <div class="ui raised segment">
+              
+              <!-- круглая кнопочка edit -->
+              <form action="{{ url_for("edit") }}" method="post">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                <input name="edit_id" value="{{ entry.rowid }}" hidden>
+                <button class="circular ui icon right floated button" name="edit_btn" value="edit">
+                  <i class="write icon"></i>
+                </button>
+              </form>
+              
+              <!--  кнопочка publish/unpublish -->
+
+              <form style="display: inline; " action="{{ url_for('edit') }}" method="post">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                <!--сделать в edit раздел про кнопку паблиш -->
+                <input name="rowid" value="{{ entry.rowid }}" hidden>
+                <button class="ui inverted pink button" name="publish_index" value="publish_index"><i class="unhide icon"></i>Publish
+                </button>
+              </form>
+              <p></p>
+              <p></p>
+              <!-- чтобы у каждого поста был свой url -->
+              {% set url_test = entry.url %}
+              
+              <!-- заг -->
+                <h1 class="ui header index"><a class="ui header index_header_links" href="{{ url_for("admin_show_post", url = url_test )}}">{{ entry.title|safe }}</a></h1>
+                
+                <p></p>
+                <p><i>{{ entry.date|safe }}</i></p>
+              
+                <p></p> 
+                <p>{{ entry.lead| safe }}</p>
+                {% if entry.body|length < 980 %}
+                    <p>{{ entry.body|safe }}</p>
+                {% else %}
+                <div class="ui accordion">
+                  <div class="title">
+                    <i class="dropdown icon"></i>
+                    More
+                  </div>
+                  <div class="content">
+                    <p>{{ entry.body|safe }}</p>
+                  </div>
+                </div><!-- end of accordion -->
+                {% endif %}<!-- end of if post is > than 980 -->
+              
+        </div> <!--end of ui raised segment -->
+
+        {% endif %}<!-- end of if post is published -->
+              
+{% endfor %}
+</div><!--end of tab -->
+
+<!-- published items  -->
+<div class="ui bottom attached tab segment" data-tab="third">
+  
+    {% for entry in entries %}    
+            
+    {% if entry.published %}
+            
+            <div class="ui raised segment">
+              
+                <!-- round edit button -->
+                <form action="{{ url_for("edit") }}" method="post">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                  <input name="edit_id" value="{{ entry.rowid }}" hidden>
+                  <button class="circular ui icon right floated button" name="edit_btn" value="edit">
+                    <i class="write icon"></i>
+                  </button>
+                </form>
+            <!-- publish button -->
+
+            <form style="display: inline;" action="{{ url_for('edit') }}" method="post">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+              <input name="rowid" value="{{ entry.rowid }}" hidden>
+              <button class="ui basic button" name="unpublish" value="unpublish"><i class="hide icon"></i>
+                Unpublish
+              </button>
+            </form>
+            
+            {% if not entry.top5 %}
+            
+                  {# кнопка добавить в top5 #}
+                  <form style="display: inline;" action="{{ url_for("top_5")}}" method="post">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                    <input name="rowid" value="{{ entry.rowid }}" hidden>
+                    <button class="ui inverted violet button" name="add_to_top5" value="add_to_top5"><i class="paw icon"></i>
+                      Top 5
+                    </button>
+                  </form>
+                  
+            {% else %}
+                    
+                  {# кнопка убрать из top5 #}
+                  <form style="display: inline;" action="{{ url_for("top_5")}}" method="post">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                    <input name="rowid" value="{{ entry.rowid }}" hidden>
+                    <button class="ui basic button" name="remove_from_top5" value="remove_from_top5"><i class="paw icon"></i>
+                      Untop 5
+                    </button>
+                  </form>
+            
+            {% endif %}
+            
+            
+              <p></p>
+              <p></p>
+            
+              <h1 class="ui header index"><a class="ui header index_header_links" href="{{ url_for("admin_show_post", url = entry.url )}}">{{ entry.title|safe }}</a></h1>
+              
+              <p></p>
+              
+              <p><i>{{ entry.date|safe }}</i></p>
+            
+              <p></p> 
+              
+              <p>{{ entry.lead| safe }}</p>
+              
+                  {% if entry.body|length < 980 %}
+                      <p>{{ entry.body|safe }}</p>
+                  {% else %}
+                  
+                  <div class="ui accordion">
+                    <div class="title">
+                      <i class="dropdown icon"></i>
+                      More
+                    </div>
+                    <div class="content">
+                      <p>{{ entry.body|safe }}</p>
+                    </div>
+                  </div><!-- end of accordion -->
+                  {% endif %}<!-- end of if post is > than 980 -->
+    
+          
+          </div> <!--end of ui raised segment -->
+
+    {% endif %}<!-- end of if post is published -->
+    
+{% endfor %}<!-- end of for entry in entries -->
+
+</div><!--end of 3rd tab -->
+
+<div class="ui bottom attached tab segment active" data-tab="fourth">
+      
+  <div class="ui raised segment">
+    
+          <!-- round edit button -->
+          <form action="{{ url_for("edit") }}" method="post">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                <input name="edit_id" value="{{ pinned_entry.rowid }}" hidden>
+                <button class="circular ui icon right floated button" name="edit_btn" value="edit">
+                  <i class="write icon"></i>
+                </button>
+          </form>
+          
+          <!-- publish button -->
+          {% if pinned_entry.published %}
+          
+              <form style="display: inline;" action="{{ url_for('edit') }}" method="post">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                <input name="rowid" value="{{ pinned_entry.rowid }}" hidden>
+                <button class="ui basic button" name="unpublish" value="unpublish"><i class="hide icon"></i>
+                  Unpublish
+                </button>
+              </form>
+          
+          {% else %}
+          
+              <form style="display: inline; " action="{{ url_for('edit') }}" method="post">
+                      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                      <!-- publish button -->
+                      <input name="rowid" value="{{ pinned_entry.rowid }}" hidden >
+                      <button class="ui inverted pink button" name="publish_index" value="publish_index"><i class="unhide icon"></i>Publish
+                      </button>
+              </form>
+      
+          {% endif %}
+          
+          <p></p>
+          <p></p>
+        
+        <!-- header -->
+          <h1 class="ui header index"><a class="ui header index_header_links" href="{{ url_for("admin_show_post", url = pinned_entry.url )}}">{{ pinned_entry.title|safe }}</a></h1>
+          
+          <p></p>
+          <p><i>{{ pinned_entry.date|safe }}</i></p>
+        
+          <p></p> 
+          <p>{{ pinned_entry.lead| safe }}</p>
+          <p>{{ pinned_entry.body| safe }}</p>
+        
+  </div> <!--end of ui raised segment -->
+      
+      
+</div><!--end of 4th tab  -->
+
+</div><!--end of all tab thing -->
+{% endblock  %}

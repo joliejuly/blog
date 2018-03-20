@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    
+    <!-- for devices, required -->
+      <meta name="viewport" body="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+      <!-- reset default browser css -->
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename="reset.css")}}">
+      
+      <!-- google fonts -->
+      
+      <!--tiny mce thing -->
+    
+      <script src="../static/tinymce/js/tinymce/tinymce.min.js"></script>
+
+      <script type="text/javascript">
+      tinymce.init({
+        selector: "#myEditor",
+        theme: "modern",
+        plugins: [
+        "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+        "searchreplace wordcount visualblocks visualchars code fullscreen",
+        "insertdatetime media nonbreaking save table contextmenu directionality",
+        "template paste textcolor colorpicker textpattern imagetools"
+        ],
+        toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+        toolbar2: "print preview media | forecolor backcolor",
+        image_advtab: true,
+        templates: [
+        {title: 'Test template 1', body: 'Test 1'},
+        {title: 'Test template 2', body: 'Test 2'}
+          ]
+        });
+      </script>
+      
+      <!--semantic-ui thing -->
+      <link rel="stylesheet" type="text/css" href="../static/semantic/semantic.min.css">
+      <script
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"></script>
+      <script src="../static/semantic/semantic.min.js"></script>
+      
+      <!-- my css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename="styles.css")}}">
+      
+      <script src="../static/myscript.js"></script>
+
+      <title>My blog</title>
+  </head>
+  
+  <body>
+    
+    <!-- logo and header -->
+    <header>
+      <a href="{{ url_for("index") }}">
+      <img class="shiba_image" src="/static/images/rounded_shiba.png" alt="Shiba Inu logo">
+      </a>
+
+      <a href="{{ url_for("index") }}">
+        <h1>Shiba Inu blog</h1>
+      </a>
+      
+      <h4 class="ui horizontal divider header">
+        Everyone has an inner Shiba Inu inside   
+      </h4>
+      
+    </header>
+    
+    {% block menu %}{% endblock %}
+      
+    
+    <!-- field for main content -->
+    <div class="ui grid">
+      <!-- empty column -->
+      <div class="one wide column"></div>
+      
+      <!-- column for main content -->
+      <div class="ten wide column">
+        
+        <!-- flashed messages  -->
+        <div class="ui main text container">
+      
+          {% for message in get_flashed_messages()  %}
+          <div class="ui icon message">
+            <i class="checkmark icon"></i>
+            <div class="body">
+              <div class="header">
+                {{ message }}
+              </div>
+            </div>
+          </div>
+          
+          {% endfor %}
+
+          
+          {% block article %}{% endblock %}
+        
+        </div><!-- end of "ui main text container" -->
+        
+      </div>
+      
+    
+
+      <!-- right column for navigation -->
+      
+{% block right_menu %}
+          
+        <div class="five wide column">
+          <div class="ui large vertical menu" id="vertical_menu">
+            
+                <!-- subscription -->
+                <div class="item" id="mail_menu_item">
+                    
+                  <p class="subscribe_p">Awesome Shiba Inu news every week:</p>
+                      <form action="{{ url_for("subscribe")}}" method="post" class="email_form">
+                        <div class="ui icon input">
+                          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                          <input type="text" placeholder="mail@yahoo.com" name="email">
+                          <i class="mail icon" id="mail_icon"></i>
+                        </div>             
+                          <button class="ui primary centered button" id="right_menu_subscribe_button">Subscribe</button>
+                      </form>
+                </div><!-- end of subscription -->
+                
+                
+                <!-- Top-5 posts block -->
+                <div class="item">
+                  
+                  <h4>First time here?</h4> 
+                  <p>Have a glance on our top-5 posts:</p> 
+                      
+                  
+                  <!-- list of top-5 posts -->
+                  <div class="menu" id="top_5">
+                        
+                        {% for entr5 in entries_top_5 %}
+                        
+                            <a class="item" href="{{ url_for("show_post", url = entr5.url)}}">{{ entr5.title }}</a>
+                        
+                        {% endfor %}
+                        
+                        <div class="ui horizontal divider">Or</div>
+      
+                  </div>
+                  
+                  <a class="ui button" id="read_more_btn" href="{{ url_for("allposts") }}">Read all posts</a>
+                  
+                </div><!-- end of Top-5 posts block -->
+              
+                
+                <!-- links -->
+                <div class="item">
+                  <div class="menu">
+                    <a class="active item">About</a>
+                    <a class="item">Team</a>
+                    <a class="item">Contacts</a>
+                  </div>
+                </div>
+                
+                
+                
+                <!-- search -->
+                <div class="item">
+                  <form action="{{ url_for("search")}}" method="post">
+                    <div class="ui icon input">
+                      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                      <input type="text" name="user_search" placeholder="Search...">
+                      <i class="search icon"></i>
+                    </div>
+                  </form>
+                </div>
+                
+                
+                
+                
+                <!-- social media -->
+                <div class="item" id="social_media">
+                  
+                  <a><i class="facebook square icon"></i></a>
+                  <a><i class="medium icon"></i></a>
+                  <a><i class="quora icon"></i></a>
+                  
+                </div>
+
+                
+                
+              </div>
+              
+              
+              
+                    
+      </div> <!-- end of vertical menu -->
+
+
+    </div><!-- end of four wide column" -->
+
+{% endblock  %}
+
+{% block footer %} 
+<!-- footer -->
+<div class="ui inverted vertical footer segment" id="footer">
+    <div class="ui center aligned container">
+      <div class="ui stackable inverted divided grid">
+        <div class="three wide column">
+          <h4 class="ui inverted header">Info</h4>
+          <div class="ui inverted link list">
+            
+            <a class="item" href="{{ url_for("index") }}">About</a>
+            <a class="item" href="{{ url_for("index") }}">Team</a>
+            <a class="item" href="{{ url_for("index") }}">Careers</a>
+            <a class="item" href="{{ url_for("index") }}">Contacts</a>
+
+
+
+            {% if session.logged_in %}
+
+            <a class="item" href="{{ url_for("create")}}">Add entry</a>
+            
+            {% endif %}
+          </div>
+        </div>
+        <div class="three wide column">
+          <h4 class="ui inverted header">Shiba Inu Blog</h4>
+          <div class="ui inverted link list">
+            <a class="item" href="{{ url_for("index") }}">Home</a>
+            <a class="item" href="{{ url_for("allposts") }}">All posts</a>
+            <a class="item" href="{{ url_for("allposts") }}">Top 5</a>
+            
+          </div>
+        </div>
+
+        <div class="nine wide column">
+          
+          <div class="four wide column">
+            <h4>Awesome Shiba Inu news every week</h4>
+            <p>Every Friday we share with you most interesting stories about Shiba Inu breed. </p>
+            
+            <form action="{{ url_for("subscribe")}}" method="post" class="email_form">
+              <div class="ui action inverted input">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                <input type="text" placeholder="mail@yahoo.com" name="email">
+                  <button class="ui inverted button">Subscribe</button>
+                  
+                </div>
+            </form>
+          </div>
+          
+          
+          
+        </div>
+      </div>
+      <div class="ui inverted section divider"></div>
+      <img src="../static/images/rounded_shiba.png" class="ui centered mini image shiba_image">
+      <div class="ui horizontal inverted small divided link list">
+        <a class="item" href="#">Site Map</a>
+        <a class="item" href="#">Contact Us</a>
+        <a class="item" href="#">Terms and Conditions</a>
+        <a class="item" href="#">Privacy Policy</a>
+      </div>
+    </div>
+  </div>
+{% endblock  %}
+
+
+  </body>
+</html>

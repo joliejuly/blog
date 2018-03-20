@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    
+    <!-- for devices, required -->
+      <meta name="viewport" body="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+      <!-- reset default browser css -->
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename="reset.css")}}">
+      
+      <!-- google fonts -->
+      
+      <!--tiny mce thing -->
+    
+      <script src="../static/tinymce/js/tinymce/tinymce.min.js"></script>
+
+      <script type="text/javascript">
+      tinymce.init({
+        selector: "#myEditor",
+        theme: "modern",
+        plugins: [
+        "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+        "searchreplace wordcount visualblocks visualchars code fullscreen",
+        "insertdatetime media nonbreaking save table contextmenu directionality",
+        "template paste textcolor colorpicker textpattern imagetools"
+        ],
+        toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+        toolbar2: "print preview media | forecolor backcolor",
+        image_advtab: true,
+        templates: [
+        {title: 'Test template 1', body: 'Test 1'},
+        {title: 'Test template 2', body: 'Test 2'}
+          ]
+        });
+      </script>
+      
+      <!--semantic-ui thing -->
+      <link rel="stylesheet" type="text/css" href="../static/semantic/semantic.min.css">
+      <script
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"></script>
+      <script src="../static/semantic/semantic.min.js"></script>
+      
+      <!-- my css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename="styles.css")}}">
+      
+      <script src="../static/myscript.js"></script>
+
+      <title>My blog</title>
+</head>
+  
+<body>
+    
+{% block menu %}
+    
+    <div class="ui secondary pointing menu">
+
+          <div class="item">
+            <a href="{{ url_for("index")}}">
+            <img class="ui mini image" src="/static/images/rounded_shiba.png" alt="Shiba Inu logo">
+            </a>
+          </div>
+          
+          <a class="item active" href="{{ url_for("admin_posts") }}">All posts</a>
+
+          {% if session.logged_in %}
+
+          <a class="item" href="{{ url_for("create")}}">Add entry</a>
+
+            <!-- login/logout right item -->
+            <div class="right item">
+                <form action="{{ url_for("logout") }}" method="post">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                    <input class="ui button" type="submit" value="Log out">
+                </form>
+            </div><!-- end of right item -->
+
+            {% else %}
+
+            <div class="right item">
+                <form action="{{ url_for("login") }}" method="get">
+                    <input class="ui button" type="submit" value="Log in">
+                </form>
+            </div>
+
+          {% endif %}
+
+    </div>
+    {# end of menu #}
+    
+{% endblock %}
+
+
+<div class="ui grid">
+  
+{% block right_menu %}
+    
+      <!-- right column -->
+      <div class="four wide column">
+          
+          <div class="ui large vertical menu" style="margin-left: 2em; margin-top: 3.2em;" >
+                    
+                      <!-- links -->
+                      <div class="item">
+                        <div class="menu">
+                          <a class="active item">About</a>
+                          <a class="item">Team</a>
+                          <a class="item">Contacts</a>
+                        </div>
+                      </div>
+                      
+                      
+                      <!-- search -->
+                      <div class="item">
+                        <form action="{{ url_for("search")}}" method="post">
+                          <div class="ui icon input">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                            <input type="text" name="user_search" placeholder="Search...">
+                            <i class="search icon"></i>
+                          </div>
+                        </form>
+                      </div>
+              
+                </div> <!-- end of vertical menu -->
+
+          </div><!-- end of four wide column  -->
+                
+{% endblock %}
+
+<!-- column for main content  -->
+<div class="eleven wide column">
+  <div class="ui main text container">
+
+{% block flashed_messages %}
+
+        <!-- flashed messages  -->
+      
+
+                {% for message in get_flashed_messages()  %}
+                <div class="ui icon message">
+                  <i class="checkmark icon"></i>
+                  <div class="body">
+                    <div class="header">
+                      {{ message }}
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              
+        
+{% endblock %}
+
+{% block article %}{% endblock %}
+            <!-- Shiba-Inu at the bottom of the post -->
+            <img src="../static/images/rounded_shiba.png" class="ui centered mini image shiba_image" style="margin-top: 3em;">
+      
+      </div><!-- end of main text container -->
+    
+    </div><!-- end of main column -->
+
+</div><!-- end of ui grid -->
+
+<!-- invisible footer -->
+<div style="margin-top: 10em;"></div>
+
+</body>
+</html>

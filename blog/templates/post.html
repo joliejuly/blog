@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block article %}
+
+{# breadcrumb #}
+
+<div class="ui breadcrumb">
+  <a class="section" href="{{ url_for("index") }}">Home</a>
+  <div class="divider"> / </div>
+  <a class="section" href="{{ url_for("allposts") }}">Posts</a>
+  <div class="divider"> / </div>
+  <div class="active section">{{ entry.title| safe }}</div>
+</div>
+  
+<div class="post_div">
+  
+
+      <p>{{ entry.date| safe }}</p>
+      <h1 class="ui header">  {{ entry.title| safe }} </h1>
+      <p> {{ entry.lead| safe }} </p>
+      <p>{{ entry.body| safe }} </p>
+
+</div>
+
+{#  action after  post #}
+
+<div class="ui segment" id="subscribe_or_follow_post">
+  
+  <div class="ui two column middle aligned very relaxed stackable grid">
+        <div class="column">
+    
+            <h3>You will enjoy your fridays with our newsletter. </h3>
+            
+              <form action="{{ url_for("subscribe")}}" method="post">
+                <div class="ui action input">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                  <input type="text" placeholder="mail@yahoo.com" name="email">                        
+                  <button class="ui button">Subscribe</button>
+                  </div> 
+              </form>
+      
+          </div>
+  
+          <div class="ui vertical divider">
+            Or
+          </div>
+          
+          <div class="center aligned column">
+            <h2>Follow us:</h2>
+            <a class="circular ui icon button"><i class="facebook square icon"></i></a>
+            <a class="circular ui icon button"><i class="medium icon"></i></a>
+            <a class="circular ui icon button"><i class="quora icon"></i></a>
+          </div>
+        </div>
+</div>{# end of ui segment (subscribe or follow) #}
+  
+
+
+{% endblock  %}

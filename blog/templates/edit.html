@@ -1,0 +1,61 @@
+{% extends "admin_base.html" %}
+
+{% block article %}
+  <h1 class="ui heading">Edit your entry:</h1>
+  <form class="ui form" action="{{ url_for('update') }}" method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    <button class="ui right floated button" name="save_for_later" value="save_for_later">
+    Save for later
+    </button>
+    <button class="ui right floated pink button" name="publish" value="publish">
+      Publish
+    </button>
+    <div class="field">
+        <label>Title</label>
+        <input type="text" name="title" value="{{ entry.title }}">
+    </div>
+    <div class="field">
+      <label>Lead</label>
+      <input type="text" name="lead" value="{{ entry.lead }}">
+    </div>
+    <div class="field">
+      <label>Text</label>
+      <textarea id="myEditor" name="body" cols=55 rows=35 value="">{{ entry.body }}</textarea>
+    </div>
+    <input type="checkbox" checked="checked" name="rowid" value="{{ entry.rowid }}" hidden >
+  </form>
+
+  <button class="ui red test button" name="edit_delete_btn" value="delete">
+      Delete forever
+  </button>
+
+<div class="ui tiny test1 modal">
+  <div class="header">
+    Delete post
+  </div>
+  <div class="content">
+    Are you sure?
+  </div>
+  <div class="actions" id="actions">
+      <div class="ui negative left floated button">
+        No
+      </div>
+      <form action="{{ url_for("update") }}" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <button id="delete_btn" class="ui positive right labeled icon button" name="edit_delete_btn" value="delete">
+            <i class="checkmark icon"></i>Yes
+        </button>
+        <input type="checkbox" checked="checked" name="rowid" value="{{ entry.rowid }}" hidden >
+      </form>
+</div>  <!--end of class actions -->
+</div><!-- end of modal itself -->
+
+{% endblock  %}
+
+$('.ui.basic.modal')
+  .modal({
+    onDeny    : function(){
+      .modal('hide');
+    },
+  })
+  .modal('show')

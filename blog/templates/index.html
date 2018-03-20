@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block article %}
+
+      <div class="ui breadcrumb">
+        <a class="section" href="{{ url_for("index") }}">Home</a>
+        <div class="divider"> / </div>
+        <a class="section" href="{{ url_for("allposts") }}">Posts</a>
+      </div>
+
+      {#  pinned post #}
+        <div class="">
+        
+          <h1 class="ui header index">
+            <a class="ui header index_header_links" href="
+                {{ url_for("show_post", url = pinned_entry.url ) }}">
+                {{ pinned_entry.title|safe }}
+            </a>
+          </h1>
+          
+          <p></p> 
+          <p><i>{{ pinned_entry.date|safe }}</i></p>
+          <p>{{ pinned_entry.lead| safe }}</p>
+          <p>{{ pinned_entry.body|safe }}</p>
+          </div>
+      {#  end of pinned post #}
+      
+      {#  action after pinned post #}
+      
+      <div class="ui segment" id="subscribe_or_follow_segment">
+        
+        <div class="ui two column middle aligned very relaxed stackable grid">
+              <div class="column">
+          
+                  <h3>You will enjoy your fridays with our newsletter. </h3>
+                
+                    <form action="{{ url_for("subscribe")}}" method="post">
+                      <div class="ui action input">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                        <input type="text" placeholder="mail@yahoo.com" name="email">                        
+                        <button class="ui button">Subscribe</button>
+                        </div> 
+                    </form>
+            
+                </div>
+        
+                <div class="ui vertical divider">
+                  Or
+                </div>
+                
+                <div class="center aligned column">
+                  <h2>Follow us:</h2>
+                  <a class="circular ui icon button"><i class="facebook square icon"></i></a>
+                  <a class="circular ui icon button"><i class="medium icon"></i></a>
+                  <a class="circular ui icon button"><i class="quora icon"></i></a>
+                </div>
+              </div>
+    </div>{# end of ui segment (subscribe or follow) #}
+        
+      
+      
+      
+      
+      {#  list of all posts #}
+
+      {% for entry in entries %}
+      
+          <h1 class="ui header index">
+            <a class="ui header index_header_links" href="
+                {{ url_for("show_post", url = entry.url )}}">
+                {{ entry.title|safe }}
+            </a>
+          </h1>
+          
+          <p></p> 
+          
+          <p><i>{{ entry.date|safe }}</i></p>
+          <p>{{ entry.lead| safe }}</p>
+            
+          {% if entry.body|length < 980 %}
+          
+              <p>{{ entry.body|safe }}</p>
+              
+          {% else %}
+          
+                <div class="ui accordion">
+                  <div class="title">
+                    <i class="dropdown icon"></i>
+                    More
+                  </div>
+                  <div class="content">
+                    <p>{{ entry.body|safe }}</p>
+                  </div>
+                </div><!-- end of accordion -->
+                
+          {% endif %}  
+      
+      <div class="ui divider"></div>
+          
+    {% endfor %}
+  
+{% endblock %}
+
+
+
+
+
+{# чтобы обрезало пост автоматически с многоточием
+{{ entry.body|striptags|truncate(980,True)}}
+    <a href="{{ url_for("show_post", url = url_test) }}" class="ui button">Read more</a>#}
+    
+{# </div><!-- end of ui raised segment (item) --> #}

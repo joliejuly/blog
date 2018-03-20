@@ -1,0 +1,26 @@
+{% extends "admin_base.html" %}
+
+{% block article %}
+              
+          
+            <form action="{{ url_for("edit") }}" method="post">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+              <input name="edit_id" value="{{ entry.rowid }}" hidden>
+              <button class="ui pink button" name="edit_btn" value="edit">
+                <i class="write icon"></i>Edit
+              </button>
+            </form>
+            
+          
+            
+            <div class="post_div">
+              
+                  <p>{{ entry.date| safe }}</p>
+                  <h1 class="ui header">  {{ entry.title| safe }} </h1>
+                  <p> {{ entry.lead| safe }} </p>
+                  <p>{{ entry.body| safe }} </p>
+
+            </div>
+  
+
+{% endblock %}

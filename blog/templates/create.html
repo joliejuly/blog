@@ -1,0 +1,49 @@
+{% extends "admin_base.html" %}
+
+{% block right_menu %}
+
+<div class="three wide column">
+  
+</div>
+
+{% endblock right_menu %}
+
+
+{% block article %}
+
+<div>
+  
+
+  <h2 class="ui header">Create a post:</h2>
+
+  <form class="ui form" action="{{ url_for('create') }}" method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    <button class="ui right floated button" name="save_for_later" value="save_for_later">
+    Save for later
+    </button>
+    <button class="ui right floated pink button" name="publish" value="publish">
+      Publish
+    </button>
+    
+      <div class="field">
+        <label>Title</label>
+        <input type="text" name="title" >
+        
+      </div>
+      
+      <div class="field">
+        <label>Lead</label>
+          <textarea rows="2" name="lead"></textarea>
+          
+      </div>
+      
+      <div class="field">
+      <label>Text</label>
+        <textarea id="myEditor" rows="25" name="body" autofocus></textarea>
+        
+      </div>
+  </form>
+
+</div>
+
+{% endblock  %}

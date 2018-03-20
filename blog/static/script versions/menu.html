@@ -1,0 +1,27 @@
+<div class="ui fixed pink menu">
+
+
+<a class="item" href="{{ url_for("allposts") }}">All posts</a>
+
+
+{% if session.logged_in %}
+
+<a class="item" href="{{ url_for("create")}}">Add entry</a>
+<!-- логин-логаут справа -->
+<div class="right item">
+    <form action="{{ url_for("logout") }}" method="post">
+        <input class="ui button" type="submit" value="Log out">
+    </form>
+</div><!-- end of right item -->
+
+{% else %}
+
+<div class="right item">
+    <form action="{{ url_for("login") }}" method="get">
+        <input class="ui button" type="submit" value="Log in">
+    </form>
+</div>
+
+{% endif %}
+</div>
+</div>

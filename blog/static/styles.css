@@ -1,0 +1,160 @@
+
+/* header and logo styling */
+
+header{
+  text-align: center;
+}
+header h1{
+  color: #2A4B6B;
+  font-size: 300%; 
+  padding-bottom: 0.2em;
+  padding-top: 0.3em;
+}
+header img{
+  margin-top: 2em;
+  width: 7%;
+}
+
+/* right menu styling */
+
+#vertical_menu{
+  float: right;
+  margin-top: 3em;
+  margin-right: 1em;
+}
+
+#mail_menu_item{
+  text-align: center;
+}
+#right_menu_subscribe_button {
+  background-color: #2A4B6B;
+  margin-top: 1em;
+  font-size: 110%;
+}
+
+.item h4{
+  font-size: 110%;
+  margin-top: 1em;
+}
+
+.subscribe_p {
+  font-weight: 600;
+  text-align: center;
+  font-size: 120%;
+  color: #2A4B6B;
+}
+
+#mail_icon{
+  color: #2A4B6B !important;
+}
+
+#top_5 a{
+  font-size: 140%;
+  line-height: 1.2em;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding-left: 0.8em;
+  color: rgba(42, 75, 107, 0.8);
+}
+
+#top_5 a:hover {
+  color: #2A4B6B;
+}
+
+#read_more_btn {
+  margin-left: 3.2em;
+  margin-top: 0.6em;
+  margin-bottom: 0.6em;
+  background-color: rgba(42, 75, 107, 0.8);
+  color: white;
+}
+#read_more_btn:hover{
+  background-color:#2A4B6B; 
+}
+
+#social_media {
+  text-align: center;
+}
+
+#social_media a{
+  color: rgba(42, 75, 107, 0.8);
+  font-size: 110%;
+}
+#social_media a:hover{
+  color: #2A4B6B;
+  cursor: pointer;
+}
+
+/* end  of right menu styling */
+#subscribe_or_follow_segment {
+  padding: 2em;
+  /*margin-left: -4em;*/
+  margin: 2em -1em 2em -4em;
+}
+
+#subscribe_or_follow_post{
+  margin-top: 4em;
+}
+
+.ui.breadcrumb{
+  margin-bottom: 2em;
+}
+
+
+#post_search{
+  margin-bottom: 3em;
+}
+
+#login_form {
+width: 300px;
+padding: 1.2em;
+
+}
+.ui.raised.segment{
+  padding: 2em; 
+}
+
+.main.container {
+    margin-top: 3em;
+}
+  
+.ui.header.index{
+  display: inline;
+}
+
+#unpublished{
+  display: inline;
+  color: darkgrey;
+}
+
+.ui.red.test.button{
+  margin-top: 1em;
+}
+
+#footer{
+  padding: 5em;
+  margin-top: 10em;
+  background-color: #2A4B6B;
+}
+
+.index_header_links{
+  color: rgba(42, 75, 107, 0.8) !important;
+}
+
+.index_header_links:hover{
+  color: #2A4B6B !important;
+}
+
+.index_header_links.unpublished{
+  color: #696969;
+}
+.index_header_links.unpublished:hover{
+  color: pink;
+}
+
+#index_header_lead{
+  color: #696969;
+}
+#index_header_lead:hover{
+  color: pink;
+}

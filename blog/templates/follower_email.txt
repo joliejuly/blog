@@ -1,0 +1,8 @@
+Hello! We are glad you are with us. 
+
+You may read some recent posts if you want to:
+
+{{ url_for('allposts', _external=True) }}
+
+Regards,
+The blogpost admin

@@ -1,0 +1,26 @@
+{% extends "admin_base.html" %}
+
+{% block article %}
+  <h2>Please, login:</h2>
+  <form id="login_form" class="ui form" action="{{ url_for('login') }}" method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    <div class="field">
+      <label>Password</label>
+      <input type="password" name="password" value="">
+    </div>
+    <div class="field">
+      <div class="ui toggle checkbox">
+        <input type="checkbox" tabindex="0" checked="checked">
+        <label>I agree to the Terms and Conditions</label>
+      </div>
+    </div>
+    <button class="ui button" type="submit">Log in</button>
+  </form>
+  
+{% endblock  %}
+
+<form class="" action="{{ url_for('login') }}" method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+  <input type="password" name="password" value="">
+  <input type="submit" name="" value="Log in">
+</form>

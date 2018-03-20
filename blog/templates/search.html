@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block article %}
+
+        {# breadcrumb #}
+        <div class="ui breadcrumb">
+          <a class="section" href="{{ url_for("index") }}">Home</a>
+          <div class="divider"> / </div>
+          <a class="section" href="{{ url_for("allposts") }}">Posts</a>
+        </div>
+
+          
+        {# search field #}
+
+        <form class="ui form" action="{{ url_for("search")}}" method="post">
+          <div class="ui fluid icon input" id="post_search">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <input type="text" name="user_search" placeholder="Search Shiba Inu posts">
+            <i class="search icon"></i>
+          </div>
+        </form>
+
+
+        {# search results #}
+        
+        {% if not entries1 %}
+            <p>Sorry, no results</p>
+        {% endif %}
+        
+        {% for entry in entries1 %}
+        
+              <a href="{{ url_for("show_post", url = entry.url ) }}"><h2>{{ entry.title|safe }}</h2></a>
+              
+              <p>{{ entry.snippet|safe }}</p>
+              
+              <hr>
+        
+        {% endfor %}
+  
+    {# less strict results #}
+    {# {% for entry2 in entries2 %}
+    
+            <a href="{{ url_for("show_post", url = entry2.url ) }}"><h2 class="ui header index_header_links">{{ entry2.title|safe }}</h2></a>
+                
+            <p>{{ entry2.0|safe }}</p>
+          
+            <hr>
+            
+    {% endfor %} #}
+
+{% endblock %}
