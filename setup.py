@@ -11,6 +11,7 @@ setup(
     install_requires = [
         'flask',
         'flask_wtf',
-        'flask_mail', 
+        'flask_mail',
+        'unidecode',
     ],
 )
