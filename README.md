@@ -28,7 +28,7 @@ Files should be installed as a package:
 ```
 $ cd blog
 $ export FLASK_APP=blog
-$ export FLASK_APP=debug
+$ export FLASK_DEBUG=true
 $ pip3 install -e .
 $ flask run
 ```
